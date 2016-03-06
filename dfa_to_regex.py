@@ -33,35 +33,26 @@ class DFA_to_REGEX(object):
             r1 = ''
 
         if el_state in gnfa[el_state].keys():
-            # if gnfa[el_state][el_state] != 'e':
                 if '*' in gnfa[el_state][el_state] or '|' in gnfa[el_state][el_state] or len(gnfa[el_state][el_state]) > 1:
                     r2 = '(' + gnfa[el_state][el_state] + ')*'
                 else:
                     r2 = gnfa[el_state][el_state] + '*'
-            # else:
-                # r2 = ''
         else:
             r2 = ''
 
         if qj in gnfa[el_state].keys():
-            # if gnfa[el_state][qj] != 'e':
                 if '*' in gnfa[el_state][qj] or '|' in gnfa[el_state][qj]:
                     r3 = '(' + gnfa[el_state][qj] + ')'
                 else:
                     r3 = gnfa[el_state][qj]
-            # else:
-                # r3 = ''
         else:
             r3 = ''
 
         if qj in gnfa[qi].keys():
-            # if gnfa[qi][qj] != 'e':
                 if '*' in gnfa[qi][qj] or '|' in gnfa[qi][qj]:
                     r4 = '(' + gnfa[qi][qj] + ')'
                 else:
                     r4 = gnfa[qi][qj]
-            # else:
-                # r4 = ''
         else:
             r4 = ''
         if r4 != '':
@@ -89,9 +80,7 @@ class DFA_to_REGEX(object):
                 for qi in f:
                     for qj in t:
                         if qj != el_state and qi != el_state:
-                            # print qi, '-', el_state, '-', qj
                             new_tr = DFA_to_REGEX.new_transition(qi, el_state, qj, gnfa)
-                            # print new_tr
                             gnfa[qi][qj] = new_tr
 
                 # state elimination below
